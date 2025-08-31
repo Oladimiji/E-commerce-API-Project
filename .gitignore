@@ -1,0 +1,27 @@
+# Virtual environment
+venv/
+.env
+
+# Django specific files
+*.log
+*.pot
+_pycache_/
+local_settings.py
+db.sqlite3
+
+# Media and static files
+/media/
+/static/
+
+# OS-specific files
+.DS_Store
+.vscode/
+
+ * Save the file.
+Step 3: Add and Commit Your Files
+Now you'll stage your files and create your first commit.
+ * Add all the project files to the staging area:
+   git add .
+
+ * Commit the files with a descriptive message:
+   git commit -m "Initial commit of e-commerce API"

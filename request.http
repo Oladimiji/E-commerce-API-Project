@@ -1,0 +1,113 @@
+### Register a new user (Admin)
+POST http://127.0.0.1:8000/api/register/
+Content-Type: application/json
+
+{
+    "username": "Isla",
+    "email": "oloruntonoah@gmail.com",
+    "password": "Temitayo"
+}
+
+### Get a JWT token (Admin)
+@host = http://127.0.0.1:8000
+POST {{host}}/api/token/
+Content-Type: application/json
+
+{
+    "username": "Isla",
+    "password": "Temitayo"
+}
+
+### Create a new product (requires an admin token)
+@token = 
+POST {{host}}/api/products/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Laptop",
+    "description": "Powerful new laptop for work and gaming.",
+    "price": 1200.00,
+    "stock": 50
+}
+
+### View all products
+GET {{host}}/api/products/
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### View a single product by ID
+GET {{host}}/api/products/1/
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### Update a product by ID
+PUT {{host}}/api/products/1/
+Content-Type: application/json
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+{
+    "name": "Updated Laptop",
+    "description": "A more powerful laptop.",
+    "price": 1350.00,
+    "stock": 45
+}
+
+### Delete a product by ID
+DELETE {{host}}/api/products/1/
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+
+
+### Register a new regular user
+POST {{host}}/api/register/
+Content-Type: application/json
+
+{
+    "username": "son",
+    "email": "regular@example.com",
+    "password": "Temitayo"
+}
+
+### Get a JWT token for the regular user
+POST {{host}}/api/token/
+Content-Type: application/json
+
+{
+    "username": "son",
+    "password": "Temitayo"
+}
+
+### Add a product to the cart
+@regular_user_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2NjEwMjcyLCJpYXQiOjE3NTY2MDk5NzIsImp0aSI6IjM2NTZhODJlNTgyZTRkNDU5Mjk4YzdhOTU1OWVhZjI3IiwidXNlcl9pZCI6IjUifQ.ut-tCiRpF0jLrKQkbGx9Ey6CQc38D47_3dFVUJ06PMI
+POST {{host}}/api/cart/items/
+Content-Type: application/json
+Authorization: Bearer {{regular_user_token}}
+
+{
+  "product": 1,
+  "quantity": 2
+}
+
+### View the user's cart
+GET {{host}}/api/cart/
+Authorization: Bearer 
+
+### Update a cart item's quantity
+PUT {{host}}/api/cart/items/2/
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "product": 1,
+  "quantity": 2
+}
+
+### Delete a cart item
+DELETE {{host}}/api/cart/items/2/
+Authorization: Bearer 
+
+### Test the checkout process
+@host = http://127.0.0.1:8000
+@regular_user_token = YOUR_REGULAR_USER_TOKEN_HERE
+POST {{host}}/api/checkout/
+Content-Type: application/json
+Authorization: Bearer {{regular_user_token}}
